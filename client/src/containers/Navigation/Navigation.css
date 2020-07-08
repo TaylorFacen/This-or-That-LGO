@@ -1,0 +1,8 @@
+.navbar {
+    justify-content: center !important;
+    color: red;
+}
+
+.navbar-brand {
+    margin: 0px !important;
+}
