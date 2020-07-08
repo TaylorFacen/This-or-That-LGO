@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
 
-export default({ users }) => (
+export default({ users, handleUserProfileOpen }) => (
     <div className = "ClassmatesList">
         <Table>
             <thead>
@@ -13,7 +13,7 @@ export default({ users }) => (
             <tbody>
                 { users.map(user => (
                     <tr key = { user._id }>
-                        <td><Button variant = "link">{ user.userName }</Button></td>
+                        <td><Button variant = "link" onClick = { () => handleUserProfileOpen(user) }>{ user.userName }</Button></td>
                         <td>{ user.score.toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2}) }</td>
                     </tr>
                 ))}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 
 import ClassmatesList from './ClassmatesList';
+import Profile from './Profile';
 
 import apiService from '../../service/apiService';
 import cookieService from '../../service/cookieService';
@@ -11,7 +12,9 @@ import './Matches.css';
 class Matches extends Component {
     state = {
         isLoading: true,
-        users: null 
+        users: null,
+        focusUser: null,
+        showUserProfile: false    
     }
 
     componentDidMount(){
@@ -52,13 +55,36 @@ class Matches extends Component {
         }
     }
 
+    handleUserProfileClose(){
+        this.setState({
+            focusUser: null,
+            showUserProfile: false
+        })
+    }
+
+    handleUserProfileOpen(user){
+        this.setState({
+            focusUser: user,
+            showUserProfile: true
+        })
+    }
+
     render(){
-        const { isLoading, users } = this.state;
+        const { isLoading, users, showUserProfile, focusUser } = this.state;
+        const { questions, user } = this.props;
         return !isLoading && (
             <div className = "Matches page">
                 <h1>Class Matches</h1>
-                <Button variant = "link">View my Answers</Button>
-                <ClassmatesList users = { users } />
+                <Button variant = "link" onClick = { () => this.handleUserProfileOpen(user) }>View my Answers</Button>
+                <ClassmatesList users = { users } handleUserProfileOpen = { this.handleUserProfileOpen.bind(this) }/>
+                { showUserProfile ? (
+                    <Profile 
+                        user = { focusUser } 
+                        questions = { questions }
+                        show = { showUserProfile }
+                        handleClose = { this.handleUserProfileClose.bind(this) }
+                    />
+                ) : null }
             </div>
         )
     }
