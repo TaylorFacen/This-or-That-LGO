@@ -10,6 +10,7 @@ import Router from '../Router';
 class App extends Component {
     state = {
         user: null,
+        questions: null,
         isLoading: true
     }
 
@@ -19,14 +20,17 @@ class App extends Component {
             if ( cookieData ) {
                 const { email } = cookieData;
                 // Get user and add to state
-                apiService.getUser(email)
-                .then(resp => {
-                    const user = resp.data;
+                const userPromise = apiService.getUser(email);
+                const questionsPromise = apiService.getQuestions();
+                Promise.all([userPromise, questionsPromise])
+                .then(responses => {
+                    const user = responses[0].data;
+                    const questions = responses[1];
                     this.setState({
                         user,
+                        questions,
                         isLoading: false
                     })
-
                 })
                 .catch(error => console.log("Nooo"))
             } else {
@@ -35,11 +39,11 @@ class App extends Component {
         })
     }
     render(){
-        const { isLoading, user } = this.state;
+        const { isLoading, user, questions } = this.state;
         return !isLoading && (
             <div className = "App">
                 <Navigation />
-                <Router user = { user }/>
+                <Router user = { user } questions = { questions } />
             </div>
         )
     }

@@ -14,13 +14,9 @@ class Home extends Component {
     }
 
     componentDidMount(){
-        const { user } = this.props;
+        const { user, questions } = this.props;
         if ( user ) {
-            apiService.getQuestions()
-            .then(questions => {
-                console.log(questions.map(question => question.answerChoices.length))
-                this.setState({ user, questions, isLoading: false})
-            })
+            this.setState({ user, questions, isLoading: false})
         } else {
             window.location.replace('/login')
         }

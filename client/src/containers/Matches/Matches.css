@@ -1,0 +1,9 @@
+.ClassmatesList {
+    display: flex;
+    justify-content: center;
+}
+
+.ClassmatesList table{
+    max-width: 750px;
+    margin-top: 20px;
+}
