@@ -7,7 +7,7 @@ class Matches extends Component {
 
     render(){
         return (
-            <div className = "Matches">
+            <div className = "Matches page">
                 <h1>Matches</h1>
             </div>
         )
