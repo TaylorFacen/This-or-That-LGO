@@ -1,12 +1,15 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-export default ({ email, onChange, onSubmit }) => (
+export default ({ email, errorMessage, onChange, onSubmit }) => (
     <div className = "LoginForm">
         <Form
             onSubmit = { onSubmit }
         >
             <Form.Group controlId="formBasicEmail">
+            <Form.Text className="text-muted error">
+                { errorMessage }
+                </Form.Text>
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control 
                     type="email" 
