@@ -2,9 +2,24 @@ import React, { Component } from 'react';
 
 import LoginForm from './LoginForm';
 
+import { getUser } from '../../service/apiService';
+import cookieService from '../../service/cookieService';
+
 class Login extends Component {
     state = {
-        email: ""
+        email: "",
+        isLoading: true
+    }
+
+    componentDidMount(){
+        cookieService.parseCookie()
+        .then(cookieData => {
+            if ( cookieData ) {
+                window.location.replace(`/`)
+            } else {
+                this.setState({ isLoading: false })
+            }
+        })
     }
 
     onChange = e => {
@@ -16,12 +31,17 @@ class Login extends Component {
     onSubmit = e => {
         e.preventDefault();
 
-        console.log(this.state);
+        // Get User
+
+
+        // Set Cookie
+
+        // Redirect to Home
     }
 
     render(){
-        const { email } = this.state;
-        return (
+        const { email, isLoading } = this.state;
+        return !isLoading && (
             <div className = "Login page">
                 <h1>Login</h1>
                 <LoginForm
