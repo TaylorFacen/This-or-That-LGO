@@ -10,11 +10,13 @@ import Matches from './Matches';
 
 class Router extends Component {
     render(){
+        const { user } = this.props;
+        
         return (
             <BrowserRouter>
-                <Route exact path = '/' component = { Home } />
-                <Route exact path = '/login' component = { Login } />
-                <Route exact path = '/matches' component = { Matches } />
+                <Route exact path = '/' component = { () => <Home user = { user} /> } />
+                <Route exact path = '/login' component = { () => <Login user = { user} /> } />
+                <Route exact path = '/matches' component = { () => <Matches user = { user} /> } />
             </BrowserRouter>
         )
     }

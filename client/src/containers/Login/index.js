@@ -15,14 +15,15 @@ class Login extends Component {
     }
 
     componentDidMount(){
-        cookieService.parseCookie()
-        .then(cookieData => {
-            if ( cookieData ) {
-                window.location.replace(`/`)
-            } else {
-                this.setState({ isLoading: false })
-            }
-        })
+        const { user } = this.props;
+        
+        if ( user ) {
+            window.location.replace('/')
+        } else {
+            this.setState({
+                isLoading: false
+            })
+        }
     }
 
     onChange = e => {
@@ -37,21 +38,18 @@ class Login extends Component {
 
         // Get User
         apiService.getUser(email)
-        .then(resp => {
-            const user = resp.data;
-            console.log(user)
+        .then(() => {
+            cookieService.setCookie(email)
+            .then(() => window.location.replace(`/`))
+
         })
         .catch(error => {
             if (error.response?.status === 404) {
                 this.setState({
-                    errorMessage: "Introder alert! This game is only for the awesome LGO Class of 2022!"
+                    errorMessage: "Intruder alert! This game is only for the awesome LGO Class of 2022!"
                 })
             }
         })
-
-        // Set Cookie
-
-        // Redirect to Home
     }
 
     render(){

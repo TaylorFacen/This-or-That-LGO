@@ -1,28 +1,22 @@
 import React, { Component } from 'react';
 
-import cookieService from '../../service/cookieService';
-
 class Home extends Component {
     state = {
         isLoading: true
     }
 
     componentDidMount(){
-        cookieService.parseCookie()
-        .then(cookieData => {
-            if ( cookieData ) {
-                this.setState({ isLoading: false })
-            } else {
-                window.location.replace(`/login`)
-            }
-        })
+        const { user } = this.props;
+
+        this.setState({ user, isLoading: false})
     }
 
     render(){
-        const { isLoading } = this.state;
+        const { isLoading, user } = this.state;
         return !isLoading && (
             <div className = "Home page">
-                <h1>Home</h1>
+                <h2>Welcome { user.userName }!</h2>
+                <p>Welcome to "This or That" - LGO edition. Select which option you like best and see who else in the class you match with!</p>
             </div>
         )
     }
