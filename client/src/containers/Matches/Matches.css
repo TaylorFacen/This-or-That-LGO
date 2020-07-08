@@ -7,3 +7,11 @@
     max-width: 750px;
     margin-top: 20px;
 }
+
+.Profile .match {
+    color: green;
+}
+
+.Profile h4 {
+    text-align: center;
+}

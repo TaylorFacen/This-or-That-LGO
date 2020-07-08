@@ -79,7 +79,8 @@ class Matches extends Component {
                 <ClassmatesList users = { users } handleUserProfileOpen = { this.handleUserProfileOpen.bind(this) }/>
                 { showUserProfile ? (
                     <Profile 
-                        user = { focusUser } 
+                        userAnswers = { user.answers }
+                        focusUser = { focusUser } 
                         questions = { questions }
                         show = { showUserProfile }
                         handleClose = { this.handleUserProfileClose.bind(this) }
