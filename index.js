@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 // IMPORT MODELS
+require('./models');
 require('dotenv').config({ path: '.env'});
 
 const app = express();
@@ -20,6 +21,7 @@ db.once('open', () => console.log('connected to database'))
 app.use(bodyParser.json());
 
 // IMPORT ROUTES
+require('./routes')(app)
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
