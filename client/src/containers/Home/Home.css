@@ -1,0 +1,11 @@
+.Question .question-image {
+    max-width: 300px;
+}
+
+.answer-choices button {
+    margin-bottom: 10px;
+}
+
+.answer-choices {
+    margin-top: 10px;
+}

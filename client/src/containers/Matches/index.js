@@ -8,14 +8,19 @@ class Matches extends Component {
     }
 
     componentDidMount(){
-        cookieService.parseCookie()
-        .then(cookieData => {
-            if ( cookieData ) {
-                this.setState({ isLoading: false })
-            } else {
-                window.location.replace(`/login`)
-            }
-        })
+        const { user } = this.props;
+        if ( user ) {
+            cookieService.parseCookie()
+            .then(cookieData => {
+                if ( cookieData ) {
+                    this.setState({ isLoading: false })
+                } else {
+                    window.location.replace(`/login`)
+                }
+            })
+        } else {
+            window.location.replace('/login')
+        }
     }
 
     render(){
