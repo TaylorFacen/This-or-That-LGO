@@ -11,7 +11,7 @@ module.exports = app => {
     app.get('/api/users/:email', async(req, res) => {
         const { email } = req.params;
 
-        const user = await User.findOne({ email: email});
+        const user = await User.findOne({ email: email.toLowerCase()});
 
         if ( user ) {
             res.status(200).send(user)
